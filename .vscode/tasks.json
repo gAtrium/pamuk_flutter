@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flutter: Run (Debug)",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["run", "-d", "linux"],
+            "group": "build",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: Build (Release)",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["build", "linux", "--release"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: Clean",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["clean"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: Get Dependencies",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["pub", "get"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: Analyze",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["analyze"],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: Test",
+            "type": "shell",
+            "command": "flutter",
+            "args": ["test"],
+            "group": "test",
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,533 @@
+{
+  "appTitle": "Pamuk Desktop",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "appSubtitle": "Android Adware Uninstallation Tool",
+  "@appSubtitle": {
+    "description": "The subtitle of the application"
+  },
+  "connectToDevice": "Connect to Device",
+  "@connectToDevice": {
+    "description": "Button text to connect to Android device"
+  },
+  "disconnect": "Disconnect",
+  "@disconnect": {
+    "description": "Button text to disconnect from device"
+  },
+  "connected": "Connected",
+  "@connected": {
+    "description": "Status text when device is connected"
+  },
+  "connecting": "Connecting...",
+  "@connecting": {
+    "description": "Status text when connecting to device"
+  },
+  "disconnected": "Disconnected",
+  "@disconnected": {
+    "description": "Status text when device is disconnected"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Generic error text"
+  },
+  "catalogueMode": "Catalogue Mode",
+  "@catalogueMode": {
+    "description": "Label for catalogue mode"
+  },
+  "hunterMode": "Hunter Mode",
+  "@hunterMode": {
+    "description": "Label for hunter mode"
+  },
+  "appListMode": "App List",
+  "@appListMode": {
+    "description": "Label for app list mode"
+  },
+  "searchApps": "Search apps...",
+  "@searchApps": {
+    "description": "Placeholder text for app search field"
+  },
+  "refreshApps": "Refresh Apps",
+  "@refreshApps": {
+    "description": "Button text to refresh app list"
+  },
+  "uninstall": "Uninstall",
+  "@uninstall": {
+    "description": "Button text to uninstall app"
+  },
+  "backup": "Backup",
+  "@backup": {
+    "description": "Button text to backup app"
+  },
+  "installedApps": "Installed Apps",
+  "@installedApps": {
+    "description": "Title for installed apps section"
+  },
+  "adwareApps": "Adware Apps",
+  "@adwareApps": {
+    "description": "Title for adware apps section"
+  },
+  "currentApp": "Current App",
+  "@currentApp": {
+    "description": "Label for currently running app"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Label for app version"
+  },
+  "installDate": "Install Date",
+  "@installDate": {
+    "description": "Label for app installation date"
+  },
+  "updateDate": "Update Date",
+  "@updateDate": {
+    "description": "Label for app update date"
+  },
+  "packageName": "Package Name",
+  "@packageName": {
+    "description": "Label for app package name"
+  },
+  "adbNotFound": "ADB not found",
+  "@adbNotFound": {
+    "description": "Error message when ADB is not found"
+  },
+  "adbNotFoundDescription": "Please install Android SDK platform tools and add ADB to your PATH",
+  "@adbNotFoundDescription": {
+    "description": "Description for ADB not found error"
+  },
+  "noDeviceConnected": "No device connected",
+  "@noDeviceConnected": {
+    "description": "Error message when no Android device is connected"
+  },
+  "noDeviceConnectedDescription": "Please connect an Android device with USB debugging enabled",
+  "@noDeviceConnectedDescription": {
+    "description": "Description for no device connected error"
+  },
+  "deviceUnauthorized": "Device unauthorized",
+  "@deviceUnauthorized": {
+    "description": "Error message when device is unauthorized"
+  },
+  "deviceUnauthorizedDescription": "Please allow USB debugging on your Android device",
+  "@deviceUnauthorizedDescription": {
+    "description": "Description for device unauthorized error"
+  },
+  "loadingApps": "Loading apps...",
+  "@loadingApps": {
+    "description": "Loading message when fetching apps"
+  },
+  "noAppsFound": "No apps found",
+  "@noAppsFound": {
+    "description": "Message when no apps are found"
+  },
+  "uninstallSuccess": "App uninstalled successfully",
+  "@uninstallSuccess": {
+    "description": "Success message after uninstalling app"
+  },
+  "uninstallError": "Failed to uninstall app",
+  "@uninstallError": {
+    "description": "Error message when uninstall fails"
+  },
+  "backupSuccess": "App backed up successfully",
+  "@backupSuccess": {
+    "description": "Success message after backing up app"
+  },
+  "backupError": "Failed to backup app",
+  "@backupError": {
+    "description": "Error message when backup fails"
+  },
+  "selectBackupLocation": "Select backup location",
+  "@selectBackupLocation": {
+    "description": "Title for backup location selection dialog"
+  },
+  "hunterModeDescription": "Hunter mode monitors the currently running app and checks if it's adware",
+  "@hunterModeDescription": {
+    "description": "Description for hunter mode functionality"
+  },
+  "catalogueModeDescription": "Catalogue mode shows all known adware apps from the catalogue",
+  "@catalogueModeDescription": {
+    "description": "Description for catalogue mode functionality"
+  },
+  "appListModeDescription": "App list mode shows all installed apps on the device",
+  "@appListModeDescription": {
+    "description": "Description for app list mode functionality"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu label"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "turkish": "Turkish",
+  "@turkish": {
+    "description": "Turkish language option"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About menu option"
+  },
+  "aboutDescription": "Pamuk Desktop is a Flutter application for detecting and removing Android adware apps.",
+  "@aboutDescription": {
+    "description": "About dialog description"
+  },
+  "device": "Device",
+  "@device": {
+    "description": "Device label"
+  },
+  "restartAdbServer": "Restart ADB Server",
+  "@restartAdbServer": {
+    "description": "Restart ADB server option"
+  },
+  "troubleshooting": "Troubleshooting",
+  "@troubleshooting": {
+    "description": "Troubleshooting option"
+  },
+  "troubleshootingTitle": "Connection Troubleshooting",
+  "@troubleshootingTitle": {
+    "description": "Troubleshooting dialog title"
+  },
+  "troubleshootingDescription": "If you're having trouble connecting to your Android device, please check:",
+  "@troubleshootingDescription": {
+    "description": "Troubleshooting dialog description"
+  },
+  "adbInstallation": "1. ADB Installation:",
+  "@adbInstallation": {
+    "description": "ADB installation troubleshooting section"
+  },
+  "installAndroidSDK": "   • Install Android SDK platform tools",
+  "@installAndroidSDK": {
+    "description": "Install Android SDK instruction"
+  },
+  "addAdbToPath": "   • Add ADB to your system PATH",
+  "@addAdbToPath": {
+    "description": "Add ADB to PATH instruction"
+  },
+  "testAdbDevices": "   • Test with: adb devices",
+  "@testAdbDevices": {
+    "description": "Test ADB command instruction"
+  },
+  "deviceSettings": "2. Device Settings:",
+  "@deviceSettings": {
+    "description": "Device settings troubleshooting section"
+  },
+  "enableDeveloperOptions": "   • Enable Developer Options",
+  "@enableDeveloperOptions": {
+    "description": "Enable developer options instruction"
+  },
+  "enableUsbDebugging": "   • Enable USB Debugging",
+  "@enableUsbDebugging": {
+    "description": "Enable USB debugging instruction"
+  },
+  "setUsbMode": "   • Set USB mode to File Transfer (MTP)",
+  "@setUsbMode": {
+    "description": "Set USB mode instruction"
+  },
+  "connectionTroubleshooting": "3. Connection:",
+  "@connectionTroubleshooting": {
+    "description": "Connection troubleshooting section"
+  },
+  "useQualityUSBCable": "   • Use a good quality USB cable",
+  "@useQualityUSBCable": {
+    "description": "Use quality USB cable instruction"
+  },
+  "tryDifferentPorts": "   • Try different USB ports",
+  "@tryDifferentPorts": {
+    "description": "Try different USB ports instruction"
+  },
+  "acceptUsbDialog": "   • Accept USB debugging dialog on device",
+  "@acceptUsbDialog": {
+    "description": "Accept USB debugging dialog instruction"
+  },
+  "permissions": "4. Permissions:",
+  "@permissions": {
+    "description": "Permissions troubleshooting section"
+  },
+  "runAsAdmin": "   • Run this app as administrator (if needed)",
+  "@runAsAdmin": {
+    "description": "Run as administrator instruction"
+  },
+  "checkUsbAuthorization": "   • Check USB debugging authorization",
+  "@checkUsbAuthorization": {
+    "description": "Check USB authorization instruction"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  "mode": "Mode",
+  "@mode": {
+    "description": "Mode label"
+  },
+  "hunterModeActive": "Hunter Mode Active",
+  "@hunterModeActive": {
+    "description": "Hunter mode active title"
+  },
+  "monitoringCurrentApp": "Monitoring the current foreground app on your device.",
+  "@monitoringCurrentApp": {
+    "description": "Hunter mode monitoring description"
+  },
+  "howItWorks": "How it works:",
+  "@howItWorks": {
+    "description": "How it works section title"
+  },
+  "step1": "1. Open any app on your Android device",
+  "@step1": {
+    "description": "Hunter mode step 1"
+  },
+  "step2": "2. The app will be detected and shown below",
+  "@step2": {
+    "description": "Hunter mode step 2"
+  },
+  "step3": "3. You can choose to uninstall suspicious apps immediately",
+  "@step3": {
+    "description": "Hunter mode step 3"
+  },
+  "step4": "4. Uninstalled apps are automatically added to the catalogue",
+  "@step4": {
+    "description": "Hunter mode step 4"
+  },
+  "waitingForApp": "Waiting for app to be detected...",
+  "@waitingForApp": {
+    "description": "Waiting for app detection message"
+  },
+  "openAnyApp": "Open any app on your Android device",
+  "@openAnyApp": {
+    "description": "Instruction to open any app"
+  },
+  "uninstallApp": "Uninstall App",
+  "@uninstallApp": {
+    "description": "Uninstall app dialog title"
+  },
+  "confirmUninstall": "Are you sure you want to uninstall \"{appName}\"?",
+  "@confirmUninstall": {
+    "description": "Confirm uninstall dialog message",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "uninstallNow": "Uninstall Now",
+  "@uninstallNow": {
+    "description": "Uninstall now button text"
+  },
+  "backupAndUninstall": "Backup & Uninstall",
+  "@backupAndUninstall": {
+    "description": "Backup and uninstall button text"
+  },
+  "scanningAdware": "Scanning for adware packages...",
+  "@scanningAdware": {
+    "description": "Scanning for adware progress message"
+  },
+  "deviceClean": "Your device looks clean. No known adware packages were detected.",
+  "@deviceClean": {
+    "description": "Message when no adware is found"
+  },
+  "switchToHunterMode": "Switch to Hunter Mode",
+  "@switchToHunterMode": {
+    "description": "Button to switch to hunter mode"
+  },
+  "uninstallAll": "Uninstall All",
+  "@uninstallAll": {
+    "description": "Uninstall all button text"
+  },
+  "uninstallAllAdware": "Uninstall All Adware",
+  "@uninstallAllAdware": {
+    "description": "Uninstall all adware dialog title"
+  },
+  "uninstalledPackages": "Uninstalled {count} packages",
+  "@uninstalledPackages": {
+    "description": "Success message after uninstalling multiple packages",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "loadingAppsMessage": "Loading installed apps...",
+  "@loadingAppsMessage": {
+    "description": "Loading message when fetching installed apps"
+  },
+  "appsCount": "{count} apps",
+  "@appsCount": {
+    "description": "Count of apps displayed",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noAppsFoundSearch": "No apps found",
+  "@noAppsFoundSearch": {
+    "description": "Message when search returns no results"
+  },
+  "adjustSearchTerms": "Try adjusting your search terms",
+  "@adjustSearchTerms": {
+    "description": "Suggestion when no search results"
+  },
+  "tryRefreshing": "Try refreshing the app list",
+  "@tryRefreshing": {
+    "description": "Suggestion when no apps are found"
+  },
+  "refresh": "Refresh",
+  "@refresh": {
+    "description": "Refresh button text"
+  },
+  "details": "Details",
+  "@details": {
+    "description": "Details option in menu"
+  },
+  "appDetails": "App Details",
+  "@appDetails": {
+    "description": "App details dialog title"
+  },
+  "confirmUninstallAll": "Are you sure you want to uninstall all {count} adware apps?",
+  "@confirmUninstallAll": {
+    "description": "Confirm uninstall all dialog message",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noAdwareFound": "No adware found!",
+  "@noAdwareFound": {
+    "description": "Message when no adware is detected"
+  },
+  "adwareDetected": "Adware Detected!",
+  "@adwareDetected": {
+    "description": "Title when adware is detected"
+  },
+  "suspiciousPackagesFound": "{count} suspicious packages found",
+  "@suspiciousPackagesFound": {
+    "description": "Message showing number of suspicious packages",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "thisActionCannotBeUndone": "This action cannot be undone.",
+  "@thisActionCannotBeUndone": {
+    "description": "Warning message for irreversible actions"
+  },
+  "successfullyUninstalled": "Successfully uninstalled {appName}",
+  "@successfullyUninstalled": {
+    "description": "Success message after uninstalling an app",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToUninstall": "Failed to uninstall {appName}",
+  "@failedToUninstall": {
+    "description": "Error message when uninstall fails",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "backupApkMessage": "This will backup the APK file for \"{appName}\" and then uninstall it.\n\nThe APK will be saved to the apk_backups folder.",
+  "@backupApkMessage": {
+    "description": "Message explaining backup and uninstall process",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "successfullyBackedUpAndUninstalled": "Successfully backed up and uninstalled {appName}",
+  "@successfullyBackedUpAndUninstalled": {
+    "description": "Success message after backup and uninstall",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToBackupAndUninstall": "Failed to backup and uninstall {appName}",
+  "@failedToBackupAndUninstall": {
+    "description": "Error message when backup and uninstall fails",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Text for unknown category or value"
+  },
+  "package": "Package",
+  "@package": {
+    "description": "Label for package name in details"
+  },
+  "installed": "Installed",
+  "@installed": {
+    "description": "Label for installation date"
+  },
+  "updated": "Updated",
+  "@updated": {
+    "description": "Label for update date"
+  },
+  "suspicious": "SUSPICIOUS",
+  "@suspicious": {
+    "description": "Text for suspicious category"
+  },
+  "knownSuspiciousApp": "Known {category} app!",
+  "@knownSuspiciousApp": {
+    "description": "Warning message for known suspicious app",
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "backupSuccess": "App backed up and uninstalled successfully",
+  "@backupSuccess": {
+    "description": "Success message for backup and uninstall"
+  },
+  "backupError": "Failed to backup and uninstall app",
+  "@backupError": {
+    "description": "Error message for backup and uninstall"
+  },
+  "contributeToRepository": "Contribute to Repository",
+  "@contributeToRepository": {
+    "description": "Title for contribute dialog"
+  },
+  "packageAddedToCatalogue": "Package {packageName} has been added to the catalogue under '{category}' category.",
+  "@packageAddedToCatalogue": {
+    "description": "Message when package is added to catalogue",
+    "placeholders": {
+      "packageName": {
+        "type": "String"
+      },
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "considerContributing": "Please consider opening an issue at github.com/gAtrium/pamuk to help include this package in the official repository.",
+  "@considerContributing": {
+    "description": "Message asking user to contribute to repository"
+  },
+  "openGitHub": "Open GitHub",
+  "@openGitHub": {
+    "description": "Button to open GitHub repository"
+  },
+  "notNow": "Not Now",
+  "@notNow": {
+    "description": "Button to dismiss contribution dialog"
+  }
+}

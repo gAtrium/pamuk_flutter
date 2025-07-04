@@ -1,0 +1,209 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags like v1.0.0, v2.1.3, etc.
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.27.0'
+        channel: 'stable'
+        
+    - name: Enable Windows desktop
+      run: flutter config --enable-windows-desktop
+      
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Generate localizations
+      run: flutter gen-l10n
+      
+    - name: Build Windows app
+      run: flutter build windows --release
+      
+    - name: Create build info
+      run: |
+        echo "Build Information" > build_info.txt
+        echo "=================" >> build_info.txt
+        echo "Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" >> build_info.txt
+        echo "Commit: ${{ github.sha }}" >> build_info.txt
+        echo "Branch: ${{ github.ref_name }}" >> build_info.txt
+        echo "Flutter Version: $(flutter --version | Select-String 'Flutter')" >> build_info.txt
+        echo "" >> build_info.txt
+        echo "Installation Instructions:" >> build_info.txt
+        echo "=========================" >> build_info.txt
+        echo "1. Extract the ZIP file to your desired location" >> build_info.txt
+        echo "2. Run pamuk_desktop.exe" >> build_info.txt
+        echo "3. Make sure you have ADB (Android Debug Bridge) installed and in your PATH" >> build_info.txt
+        echo "4. Connect your Android device with USB debugging enabled" >> build_info.txt
+        echo "" >> build_info.txt
+        echo "Requirements:" >> build_info.txt
+        echo "============" >> build_info.txt
+        echo "- Windows 10 or later" >> build_info.txt
+        echo "- Android SDK Platform Tools (for ADB)" >> build_info.txt
+        echo "- Android device with USB debugging enabled" >> build_info.txt
+      shell: powershell
+      
+    - name: Copy assets to build directory
+      run: |
+        copy "catalogue.yaml" "build\windows\x64\runner\Release\"
+        copy "pamuk.svg" "build\windows\x64\runner\Release\"
+        copy "build_info.txt" "build\windows\x64\runner\Release\"
+      shell: cmd
+      
+    - name: Create ZIP package
+      run: |
+        cd build\windows\x64\runner\Release
+        powershell Compress-Archive -Path * -DestinationPath "..\..\..\..\pamuk-desktop-windows-x64.zip"
+      shell: cmd
+      
+    - name: Get version from tag
+      id: get_version
+      run: |
+        if ("${{ github.ref }}" -like "refs/tags/*") {
+          $version = "${{ github.ref }}" -replace "refs/tags/", ""
+        } else {
+          $version = "dev-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+        }
+        echo "version=$version" >> $env:GITHUB_OUTPUT
+      shell: powershell
+      
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.get_version.outputs.version }}
+        name: Pamuk Desktop ${{ steps.get_version.outputs.version }}
+        body: |
+          # Pamuk Desktop - Android Adware Uninstallation Tool
+          
+          ## What's New
+          - 🖥️ **Modern Flutter Desktop UI** - Clean, intuitive interface
+          - 🌍 **Multi-language Support** - English and Turkish localization
+          - 🔍 **Three Operation Modes**:
+            - **Catalogue Mode**: Scan and remove known adware packages
+            - **Hunter Mode**: Real-time monitoring and removal of suspicious apps
+            - **App List**: Browse all installed apps with search and filter
+          - 💾 **Backup & Uninstall**: Option to backup APKs before removal
+          - 🎯 **Real-time Detection**: Live monitoring of foreground applications
+          - 📝 **Community Contribution**: Easy GitHub integration for reporting new adware
+          
+          ## Installation Instructions
+          1. Download the `pamuk-desktop-windows-x64.zip` file
+          2. Extract to your desired location
+          3. Install Android SDK Platform Tools if not already installed
+          4. Add ADB to your system PATH
+          5. Run `pamuk_desktop.exe`
+          6. Connect your Android device with USB debugging enabled
+          
+          ## Requirements
+          - Windows 10 or later (x64)
+          - Android SDK Platform Tools (for ADB)
+          - Android device with USB debugging enabled
+          
+          ## ADB Installation
+          Download Android SDK Platform Tools from: https://developer.android.com/studio/releases/platform-tools
+          
+          ---
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/v1.0.0...${{ steps.get_version.outputs.version }}
+        files: |
+          build/windows/x64/pamuk-desktop-windows-x64.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install Linux dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev
+        
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.27.0'
+        channel: 'stable'
+        
+    - name: Enable Linux desktop
+      run: flutter config --enable-linux-desktop
+      
+    - name: Install dependencies
+      run: flutter pub get
+      
+    - name: Generate localizations
+      run: flutter gen-l10n
+      
+    - name: Build Linux app
+      run: flutter build linux --release
+      
+    - name: Create build info
+      run: |
+        cat > build_info.txt << EOF
+        Build Information
+        =================
+        Date: $(date '+%Y-%m-%d %H:%M:%S')
+        Commit: ${{ github.sha }}
+        Branch: ${{ github.ref_name }}
+        Flutter Version: $(flutter --version | head -1)
+        
+        Installation Instructions:
+        =========================
+        1. Extract the ZIP file to your desired location
+        2. Make the binary executable: chmod +x pamuk_desktop
+        3. Run ./pamuk_desktop
+        4. Make sure you have ADB (Android Debug Bridge) installed and in your PATH
+        5. Connect your Android device with USB debugging enabled
+        
+        Requirements:
+        ============
+        - Linux (Ubuntu 18.04+ recommended)
+        - Android SDK Platform Tools (for ADB)
+        - Android device with USB debugging enabled
+        EOF
+        
+    - name: Copy assets to build directory
+      run: |
+        cp catalogue.yaml build/linux/x64/release/bundle/
+        cp pamuk.svg build/linux/x64/release/bundle/
+        cp build_info.txt build/linux/x64/release/bundle/
+        
+    - name: Create ZIP package
+      run: |
+        cd build/linux/x64/release/bundle
+        zip -r ../../../../pamuk-desktop-linux-x64.zip .
+        
+    - name: Get version from tag
+      id: get_version
+      run: |
+        if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+          version="${{ github.ref#refs/tags/ }}"
+        else
+          version="dev-$(date '+%Y%m%d-%H%M%S')"
+        fi
+        echo "version=$version" >> $GITHUB_OUTPUT
+        
+    - name: Upload Linux build to release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.get_version.outputs.version }}
+        files: |
+          build/linux/x64/pamuk-desktop-linux-x64.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
