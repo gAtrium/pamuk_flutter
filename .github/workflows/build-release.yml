@@ -65,15 +65,15 @@ jobs:
     - name: Create ZIP package
       run: |
         cd build\windows\x64\runner\Release
-        powershell Compress-Archive -Path * -DestinationPath "..\..\..\..\pamuk-desktop-windows-x64.zip"
-        dir ..\..\..\..\pamuk-desktop-windows-x64.zip
+        powershell Compress-Archive -Path * -DestinationPath "..\..\..\pamuk-desktop-windows-x64.zip"
+        dir ..\..\..\pamuk-desktop-windows-x64.zip
         
     - name: Verify ZIP file location
       run: |
         echo "Checking for ZIP file in current directory:"
-        dir pamuk-desktop-windows-x64.zip
+        dir pamuk-desktop-windows-x64.zip 2>nul || echo "Not found in root"
         echo "Checking for ZIP file in build directory:"
-        if exist "build\windows\x64\pamuk-desktop-windows-x64.zip" (dir "build\windows\x64\pamuk-desktop-windows-x64.zip") else echo "File not found in build directory"
+        dir "build\windows\x64\pamuk-desktop-windows-x64.zip" 2>nul || echo "Not found in build\windows\x64\"
       shell: cmd
       
     - name: Get version from tag
@@ -91,7 +91,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: pamuk-desktop-windows-x64
-        path: pamuk-desktop-windows-x64.zip
+        path: build/windows/x64/pamuk-desktop-windows-x64.zip
         retention-days: 1
 
   build-linux:
@@ -158,15 +158,15 @@ jobs:
     - name: Create ZIP package
       run: |
         cd build/linux/x64/release/bundle
-        zip -r ../../../../pamuk-desktop-linux-x64.zip .
-        ls -la ../../../../pamuk-desktop-linux-x64.zip
+        zip -r ../../../pamuk-desktop-linux-x64.zip .
+        ls -la ../../../pamuk-desktop-linux-x64.zip
         
     - name: Verify ZIP file location
       run: |
         echo "Checking for ZIP file in current directory:"
-        ls -la pamuk-desktop-linux-x64.zip
+        ls -la pamuk-desktop-linux-x64.zip || echo "Not found in root"
         echo "Checking for ZIP file in build directory:"
-        ls -la build/linux/x64/pamuk-desktop-linux-x64.zip || echo "File not found in build directory"
+        ls -la build/linux/x64/pamuk-desktop-linux-x64.zip || echo "Not found in build/linux/x64/"
         
     - name: Get version from tag
       id: get_version
@@ -183,7 +183,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: pamuk-desktop-linux-x64
-        path: pamuk-desktop-linux-x64.zip
+        path: build/linux/x64/pamuk-desktop-linux-x64.zip
         retention-days: 1
 
   create-release:
