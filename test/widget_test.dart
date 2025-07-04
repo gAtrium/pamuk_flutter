@@ -10,12 +10,7 @@ import 'package:pamuk_desktop/models/catalogue.dart';
 void main() {
   group('AppInfo Model Tests', () {
     test('AppInfo should be created with correct properties', () {
-      final app = AppInfo(
-        package: 'com.example.test',
-        label: 'Test App',
-        version: '1.0.0',
-        category: 'user',
-      );
+      final app = AppInfo(package: 'com.example.test', label: 'Test App', version: '1.0.0', category: 'user');
 
       expect(app.package, 'com.example.test');
       expect(app.label, 'Test App');
@@ -25,14 +20,7 @@ void main() {
 
     test('AppInfo should handle optional fields', () {
       final now = DateTime.now();
-      final app = AppInfo(
-        package: 'com.example.test2',
-        label: 'Test App 2',
-        version: '2.0.0',
-        installTime: now,
-        updateTime: now,
-        category: 'system',
-      );
+      final app = AppInfo(package: 'com.example.test2', label: 'Test App 2', version: '2.0.0', installTime: now, updateTime: now, category: 'system');
 
       expect(app.installTime, now);
       expect(app.updateTime, now);
@@ -46,7 +34,7 @@ void main() {
         'adware': ['com.example.ad1', 'com.example.ad2'],
         'malware': ['com.example.mal1'],
       };
-      
+
       final catalogue = Catalogue(packages: packages);
 
       expect(catalogue.packages, packages);
@@ -56,7 +44,7 @@ void main() {
 
     test('Catalogue should handle empty packages', () {
       final catalogue = Catalogue(packages: {});
-      
+
       expect(catalogue.packages, isEmpty);
     });
   });
