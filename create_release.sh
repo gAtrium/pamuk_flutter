@@ -27,10 +27,12 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
 fi
 
-# Ensure we're on main branch
+# Ensure we're on main/master branch
 BRANCH=$(git branch --show-current)
-if [ "$BRANCH" != "main" ]; then
-    echo "⚠️  Warning: You're not on the main branch (current: $BRANCH)"
+DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+
+if [ "$BRANCH" != "$DEFAULT_BRANCH" ]; then
+    echo "⚠️  Warning: You're not on the default branch (current: $BRANCH, default: $DEFAULT_BRANCH)"
     read -p "Continue anyway? (y/N): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -53,7 +55,7 @@ echo "🏷️  Creating tag $VERSION..."
 git tag -a "$VERSION" -m "Release $VERSION"
 
 echo "📤 Pushing changes and tag..."
-git push origin main
+git push origin "$BRANCH"
 git push origin "$VERSION"
 
 echo "✅ Release $VERSION created successfully!"
