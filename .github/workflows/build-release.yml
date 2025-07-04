@@ -193,7 +193,8 @@ jobs:
       id: get_version
       run: |
         if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-          version="${{ github.ref#refs/tags/ }}"
+          version="${{ github.ref }}"
+          version="${version#refs/tags/}"
         else
           version="dev-$(date '+%Y%m%d-%H%M%S')"
         fi
