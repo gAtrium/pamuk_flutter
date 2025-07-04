@@ -58,7 +58,7 @@ jobs:
     - name: Copy assets to build directory
       run: |
         copy "catalogue.yaml" "build\windows\x64\runner\Release\"
-        copy "pamuk.svg" "build\windows\x64\runner\Release\"
+        copy "assets\pamuk_icon.svg" "build\windows\x64\runner\Release\"
         copy "build_info.txt" "build\windows\x64\runner\Release\"
       shell: cmd
       
@@ -79,49 +79,12 @@ jobs:
         echo "version=$version" >> $env:GITHUB_OUTPUT
       shell: powershell
       
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
+    - name: Upload Windows artifact
+      uses: actions/upload-artifact@v4
       with:
-        tag_name: ${{ steps.get_version.outputs.version }}
-        name: Pamuk Desktop ${{ steps.get_version.outputs.version }}
-        body: |
-          # Pamuk Desktop - Android Adware Uninstallation Tool
-          
-          ## What's New
-          - 🖥️ **Modern Flutter Desktop UI** - Clean, intuitive interface
-          - 🌍 **Multi-language Support** - English and Turkish localization
-          - 🔍 **Three Operation Modes**:
-            - **Catalogue Mode**: Scan and remove known adware packages
-            - **Hunter Mode**: Real-time monitoring and removal of suspicious apps
-            - **App List**: Browse all installed apps with search and filter
-          - 💾 **Backup & Uninstall**: Option to backup APKs before removal
-          - 🎯 **Real-time Detection**: Live monitoring of foreground applications
-          - 📝 **Community Contribution**: Easy GitHub integration for reporting new adware
-          
-          ## Installation Instructions
-          1. Download the `pamuk-desktop-windows-x64.zip` file
-          2. Extract to your desired location
-          3. Install Android SDK Platform Tools if not already installed
-          4. Add ADB to your system PATH
-          5. Run `pamuk_desktop.exe`
-          6. Connect your Android device with USB debugging enabled
-          
-          ## Requirements
-          - Windows 10 or later (x64)
-          - Android SDK Platform Tools (for ADB)
-          - Android device with USB debugging enabled
-          
-          ## ADB Installation
-          Download Android SDK Platform Tools from: https://developer.android.com/studio/releases/platform-tools
-          
-          ---
-          **Full Changelog**: https://github.com/${{ github.repository }}/compare/v1.0.0...${{ steps.get_version.outputs.version }}
-        files: |
-          build/windows/x64/pamuk-desktop-windows-x64.zip
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: pamuk-desktop-windows-x64
+        path: build/windows/x64/pamuk-desktop-windows-x64.zip
+        retention-days: 1
 
   build-linux:
     runs-on: ubuntu-latest
@@ -181,7 +144,7 @@ jobs:
     - name: Copy assets to build directory
       run: |
         cp catalogue.yaml build/linux/x64/release/bundle/
-        cp pamuk.svg build/linux/x64/release/bundle/
+        cp assets/pamuk_icon.svg build/linux/x64/release/bundle/
         cp build_info.txt build/linux/x64/release/bundle/
         
     - name: Create ZIP package
@@ -200,11 +163,97 @@ jobs:
         fi
         echo "version=$version" >> $GITHUB_OUTPUT
         
-    - name: Upload Linux build to release
+    - name: Upload Linux artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: pamuk-desktop-linux-x64
+        path: build/linux/x64/pamuk-desktop-linux-x64.zip
+        retention-days: 1
+
+  create-release:
+    needs: [build-windows, build-linux]
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download Windows artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: pamuk-desktop-windows-x64
+        path: ./artifacts/
+        
+    - name: Download Linux artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: pamuk-desktop-linux-x64
+        path: ./artifacts/
+        
+    - name: Get version from tag
+      id: get_version
+      run: |
+        if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+          version="${{ github.ref }}"
+          version="${version#refs/tags/}"
+        else
+          version="dev-$(date '+%Y%m%d-%H%M%S')"
+        fi
+        echo "version=$version" >> $GITHUB_OUTPUT
+        
+    - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.get_version.outputs.version }}
+        name: Pamuk Desktop ${{ steps.get_version.outputs.version }}
+        body: |
+          # Pamuk Desktop - Android Adware Uninstallation Tool
+          
+          ## What's New
+          - 🖥️ **Modern Flutter Desktop UI** - Clean, intuitive interface
+          - 🌍 **Multi-language Support** - English and Turkish localization
+          - 🔍 **Three Operation Modes**:
+            - **Catalogue Mode**: Scan and remove known adware packages
+            - **Hunter Mode**: Real-time monitoring and removal of suspicious apps
+            - **App List**: Browse all installed apps with search and filter
+          - 💾 **Backup & Uninstall**: Option to backup APKs before removal
+          - 🎯 **Real-time Detection**: Live monitoring of foreground applications
+          - 📝 **Community Contribution**: Easy GitHub integration for reporting new adware
+          
+          ## Installation Instructions
+          
+          ### Windows
+          1. Download the `pamuk-desktop-windows-x64.zip` file
+          2. Extract to your desired location
+          3. Install Android SDK Platform Tools if not already installed
+          4. Add ADB to your system PATH
+          5. Run `pamuk_desktop.exe`
+          6. Connect your Android device with USB debugging enabled
+          
+          ### Linux
+          1. Download the `pamuk-desktop-linux-x64.zip` file
+          2. Extract to your desired location
+          3. Make the binary executable: `chmod +x pamuk_desktop`
+          4. Install Android SDK Platform Tools if not already installed
+          5. Add ADB to your system PATH
+          6. Run `./pamuk_desktop`
+          7. Connect your Android device with USB debugging enabled
+          
+          ## Requirements
+          - **Windows**: Windows 10 or later (x64)
+          - **Linux**: Ubuntu 18.04+ or equivalent distribution
+          - Android SDK Platform Tools (for ADB)
+          - Android device with USB debugging enabled
+          
+          ## ADB Installation
+          Download Android SDK Platform Tools from: https://developer.android.com/studio/releases/platform-tools
+          
+          ---
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/v1.0.0...${{ steps.get_version.outputs.version }}
         files: |
-          build/linux/x64/pamuk-desktop-linux-x64.zip
+          ./artifacts/pamuk-desktop-windows-x64.zip
+          ./artifacts/pamuk-desktop-linux-x64.zip
+        draft: false
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
